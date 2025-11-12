@@ -64,7 +64,7 @@ async function getNotarizationLogs(opts: NotarizeOptions, id: string) {
   }
 }
 
-function parseNotarytoolOutput(output: string): any {
+export function parseNotarytoolOutput(output: string): any {
   const rawOut = output.trim();
 
   let jsonOut: string = '';
@@ -118,9 +118,7 @@ export async function notarizeAndWaitForNotaryTool(opts: NotarizeOptions) {
         },
       );
       if (zipResult.code !== 0) {
-        throw new Error(
-          `Failed to zip application, exited with code: ${zipResult.code}\n\n${zipResult.output}`,
-        );
+        throw new Error(`Failed to zip application, exited with code: ${zipResult.code}\n\n${zipResult.output}`);
       }
       d('zip succeeded, attempting to upload to Apple');
     }
